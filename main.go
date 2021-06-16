@@ -10,7 +10,7 @@ import (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/fibonacci", handlers.FibHandler)
+	r.HandleFunc("/fibonacci/{number}", handlers.FibHandler)
 	r.HandleFunc("/memoizedresults", handlers.MemoHandler)
 	// http.go Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8000", r))
