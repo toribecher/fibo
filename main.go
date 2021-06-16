@@ -1,25 +1,17 @@
 package main
 
 import (
-	"io"
 	"log"
 	"net/http"
 
+	"github.com/fibo/handlers"
 	"github.com/gorilla/mux"
 )
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/fibonacci", FibHandler)
-	r.HandleFunc("/memoizedresults", MemoHandler)
-	http.Handle("/", r)
+	r.HandleFunc("/fibonacci", handlers.FibHandler)
+	r.HandleFunc("/memoizedresults", handlers.MemoHandler)
+	// http.go Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8000", r))
-}
-
-func FibHandler(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "welcome to golang world!")
-}
-
-func MemoHandler(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "welcome to golang world!")
 }
