@@ -13,17 +13,40 @@ func FibHandler(w http.ResponseWriter, r *http.Request) {
 	number := split[len(split)-1]
 	i, _ := strconv.Atoi(number)
 
-	fibNumber := FibonacciRecursion(i)
+	fibNumber := GetFibonacci(i)
 	io.WriteString(w, fmt.Sprint(fibNumber))
 }
 
 func MemoHandler(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "welcome to golang world!")
+	split := strings.Split(r.URL.Path, "/")
+	number := split[len(split)-1]
+	i, _ := strconv.Atoi(number)
+
+	memoNumber := GetMemoizationNumber(i)
+	io.WriteString(w, fmt.Sprint(memoNumber))
 }
 
-func FibonacciRecursion(n int) int {
-	if n <= 1 {
-		return n
+func GetFibonacci(n int) int {
+	fibBox := []int{0, 1}
+	for i := 0; i < n; i++ {
+		v := fibBox[i] + fibBox[i+1]
+		fibBox = append(fibBox, v)
 	}
-	return FibonacciRecursion(n-1) + FibonacciRecursion(n-2)
+	result := int(fibBox[n])
+
+	return result
+}
+
+func GetMemoizationNumber(n int) int {
+	fibBox := []int{0, 1}
+	for i := 0; i < n; i++ {
+		v := fibBox[i] + fibBox[i+1]
+		fibBox = append(fibBox, v)
+		if v >= n {
+			break
+		}
+	}
+	result := int(len(fibBox) - 1)
+
+	return result
 }
