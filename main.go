@@ -13,6 +13,7 @@ import (
 func main() {
 	database.InitDB()
 	r := mux.NewRouter()
+	r.HandleFunc("/delete", handlers.DeleteAll)
 	r.HandleFunc("/fibonacci/{number}", handlers.FibHandler)
 	r.HandleFunc("/memoizedresults/{memoNumber}", handlers.MemoHandler)
 	log.Fatal(http.ListenAndServe(":8000", r))

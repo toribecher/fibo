@@ -6,8 +6,17 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/fibo/database"
 	"github.com/gorilla/mux"
 )
+
+func DeleteAll(w http.ResponseWriter, r *http.Request) {
+	e := database.DeleteAll()
+	if e != nil {
+		io.WriteString(w, fmt.Sprint(e.Error()))
+	}
+	io.WriteString(w, "success, all deleted")
+}
 
 func FibHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
@@ -21,7 +30,12 @@ func MemoHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	m := params["memoNumber"]
 	i, _ := strconv.Atoi(m)
-	memoNumber := GetMemoizationNumber(i)
+	var memoNumber int
+	memoNumber, err := database.GetMemo(i)
+	if err != nil {
+		memoNumber = GetMemoizationNumber(i)
+		database.InsertRow(i, memoNumber)
+	}
 	io.WriteString(w, fmt.Sprint(memoNumber))
 }
 
