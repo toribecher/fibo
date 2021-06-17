@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/gorilla/mux"
 )
 
 func TestFibHandler(t *testing.T) {
@@ -13,9 +15,11 @@ func TestFibHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(FibHandler)
 
-	handler.ServeHTTP(rr, req)
+	router := mux.NewRouter()
+	router.HandleFunc("/fibonacci/{number}", FibHandler)
+	router.ServeHTTP(rr, req)
+
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, http.StatusOK)
@@ -35,9 +39,11 @@ func TestMemoHandler(t *testing.T) {
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(MemoHandler)
 
-	handler.ServeHTTP(rr, req)
+	router := mux.NewRouter()
+	router.HandleFunc("/memoizedresults/{memoNumber}", MemoHandler)
+	router.ServeHTTP(rr, req)
+
 	if status := rr.Code; status != http.StatusOK {
 		t.Errorf("handler returned wrong status code: got %v want %v",
 			status, http.StatusOK)
