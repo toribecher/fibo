@@ -9,13 +9,14 @@ import (
 var (
 	host     = "localhost"
 	port     = 5432
-	user     = "postgres"
+	user     = os.Getenv("USER")
 	password = os.Getenv("PASSWORD")
 	dbname   = os.Getenv("DBNAME")
 )
 
 func main() {
 	a := App{}
+
 	a.Initialize(
 		host,
 		port,
