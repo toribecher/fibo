@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"database/sql"
@@ -7,6 +7,14 @@ import (
 	"net/http/httptest"
 	"os"
 	"testing"
+)
+
+var (
+	host     = os.Getenv("HOST")
+	port     = os.Getenv("PORT")
+	user     = os.Getenv("USER")
+	password = os.Getenv("PASSWORD")
+	dbname   = os.Getenv("DBNAME")
 )
 
 var a App

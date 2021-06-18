@@ -3,19 +3,19 @@ package main
 import (
 	"os"
 
-	_ "github.com/lib/pq"
+	"github.com/fibo/app"
 )
 
 var (
-	host     = "localhost"
-	port     = 5432
+	host     = os.Getenv("HOST")
+	port     = os.Getenv("PORT")
 	user     = os.Getenv("USER")
 	password = os.Getenv("PASSWORD")
 	dbname   = os.Getenv("DBNAME")
 )
 
 func main() {
-	a := App{}
+	a := app.App{}
 
 	a.Initialize(
 		host,
@@ -24,14 +24,5 @@ func main() {
 		password,
 		dbname)
 
-	a.Run(":8010")
+	a.Run(":8000")
 }
-
-// func main() {
-// 	database.InitDB()
-// 	r := mux.NewRouter()
-// 	r.HandleFunc("/delete", handlers.DeleteAll)
-// 	r.HandleFunc("/fibonacci/{number}", handlers.FibHandler)
-// 	r.HandleFunc("/memoizedresults/{memoNumber}", handlers.MemoHandler)
-// 	log.Fatal(http.ListenAndServe(":8000", r))
-// }

@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"database/sql"
@@ -10,6 +10,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	_ "github.com/lib/pq"
 )
 
 type App struct {
@@ -17,8 +18,8 @@ type App struct {
 	DB     *sql.DB
 }
 
-func (a *App) Initialize(host string, port int, user, password, dbname string) {
-	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+func (a *App) Initialize(host, port, user, password, dbname string) {
+	psqlconn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
 	var err error
 	a.DB, err = sql.Open("postgres", psqlconn)
 	if err != nil {
@@ -43,7 +44,6 @@ func (a *App) deleteAll(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	fmt.Println("SUCCESS")
 	respondWithJSON(w, http.StatusOK, map[string]string{"result": "success"})
 }
 
@@ -84,5 +84,6 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 }
 
 func (a *App) Run(addr string) {
+	log.Println("RUNNING!")
 	log.Fatal(http.ListenAndServe(addr, a.Router))
 }
