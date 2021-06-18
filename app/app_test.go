@@ -29,7 +29,7 @@ func TestMain(m *testing.M) {
 
 	ensureTableExists()
 	code := m.Run()
-	// clearTable()
+	clearTable()
 	os.Exit(code)
 }
 
@@ -230,7 +230,7 @@ func TestDeleteMemos(t *testing.T) {
 	response := executeRequest(req)
 	checkResponseCode(t, http.StatusOK, response.Code)
 
-	req, _ = http.NewRequest("DELETE", "/deleteall", nil)
+	req, _ = http.NewRequest("GET", "/deleteall", nil)
 	response = executeRequest(req)
 	checkResponseCode(t, http.StatusOK, response.Code)
 

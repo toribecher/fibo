@@ -31,9 +31,7 @@ func (a *App) Initialize(host, port, user, password, dbname string) {
 }
 
 func (a *App) initializeRoutes() {
-	a.Router.HandleFunc("/deleteall", a.deleteAll).Methods("DELETE")
-	// a.Router.HandleFunc("/products", a.getFibonacci).Methods("GET")
-
+	a.Router.HandleFunc("/deleteall", a.deleteAll).Methods("GET")
 	a.Router.HandleFunc("/fibonacci/{number}", a.getFibonacci).Methods("GET")
 	a.Router.HandleFunc("/memoizedresults/{memoNumber}", a.memoHandler).Methods("GET")
 }
