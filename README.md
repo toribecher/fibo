@@ -26,6 +26,6 @@ GET localhost:8000/fibonacci/{number}
 GET localhost:8000/memoizedresults/{memoNumber}
 GET localhost:8000/deleteall
 
-Note: Delete is usually a delete request but I made it a Get for simplicity
+Note: Delete is usually a delete request but I made it a Get for simplicity (no curl required)
 
 Thanks for the challenge!
