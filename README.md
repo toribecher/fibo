@@ -2,19 +2,19 @@
 A fibonacci fun house
 
 This application exposes three endpoints
+It runs using postgresql => https://www.postgresql.org/docs/
 
 Prerequisites: 
-1. Info on https://www.postgresql.org/docs/
-2. You will need to set your environment variables, I recommend https://direnv.net/
+1. You will need to set your environment variables, I recommend https://direnv.net/
 
-Environment variables to set:
+Environment variables to set in .envrc:
     export HOST={YOURHOST}
     export PORT={YOURPORT}
     export PASSWORD={YOURPASSWORD}
     export USER={YOURUSER}
     export DBNAME={YOURDB}
 
-3. Remember to clone repo in your GOPATH :p
+2. Remember to clone repo in your GOPATH :p
 
 To See App in Action
 
