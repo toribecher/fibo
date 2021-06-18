@@ -4,7 +4,7 @@ A fibonacci fun house
 This application exposes three endpoints
 
 Prerequisites: 
-1. Please install postgres https://www.postgresql.org/docs/
+1. Info on https://www.postgresql.org/docs/
 2. You will need to set your environment variables, I recommend https://direnv.net/
 
 Environment variables to set:
@@ -15,6 +15,8 @@ Environment variables to set:
     export DBNAME={YOURDB}
 
 3. Remember to clone in your GOPATH :p
+
+To See App in Action
 
 Step 1. run tests `make test`
 Step 2. run application `make run`
