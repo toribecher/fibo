@@ -14,6 +14,8 @@ Environment variables to set:
     export USER={YOURUSER}
     export DBNAME={YOURDB}
 
+3. Remember to clone in your GOPATH :p
+
 Step 1. run tests `make test`
 Step 2. run application `make run`
 
